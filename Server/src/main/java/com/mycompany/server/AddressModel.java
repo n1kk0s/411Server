@@ -32,9 +32,19 @@ public class AddressModel {
         
     }
     
-    public String serializeToString() {
+    // Takes AddressModel and converts and returns it as a JSON object from Jackson library
+    public JSON serializeAsJSON(AddressModel address) {
         
-        return list
+        JSON = AddressModel
+        return JSON;
+        
+    }
+    
+    // Takes JSON object from Jackson library and converts and returns it as an AddressModel
+    public static AddressModel deserializeJSON(JSON j) {
+        
+        AddressModel = JSON
+        return AddressModel;
         
     }
     
