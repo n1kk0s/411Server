@@ -93,12 +93,14 @@ public class Server {
                                     if(AddressModel.isValid(name, street, state, zip)) {
                                         
                                         AddressModel address = new AddressModel();
-                                        AddressListModel addresses = new AddressListModel();
+                                        AddressListModel addressList = new AddressListModel();
+                                        addressList.setAddressList();
                                         address.name = name;
                                         address.street = street;
                                         address.state = state;
                                         address.zip = zip;
-                                        addresses.add(address);
+                                        addressList.add(address);
+                                        addressList.saveList();
                                         out.write(ThankYouView.serveThankYou(name));
                                         
                                     } else {
@@ -116,7 +118,7 @@ public class Server {
                             
                             out.write("HTTP/1.1 200 OK\n\n");
                             System.out.println("Calling the list");
-                            out.write(AddressListView.serveList());
+                            out.write(AddressListTableView.serveTable(AddressListModel.addresses));
                             
                         } else {
                             

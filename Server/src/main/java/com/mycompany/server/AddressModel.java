@@ -5,6 +5,10 @@
  */
 package com.mycompany.server;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
  *
  * @author nweld
@@ -15,6 +19,7 @@ public class AddressModel {
     public String street = "";
     public String state = "";
     public String zip = "";
+    public static ObjectMapper mapper = new ObjectMapper();
     
     public static boolean isValid(String name,String street, String state, String zip) {
         
@@ -33,18 +38,18 @@ public class AddressModel {
     }
     
     // Takes AddressModel and converts and returns it as a JSON object from Jackson library
-    public JSON serializeAsJSON(AddressModel address) {
+    public JsonNode serializeAsJSON(AddressModel address) {
         
-        JSON = AddressModel
-        return JSON;
+        JsonNode node = mapper.valueToTree(address);
+        return node;
         
     }
     
     // Takes JSON object from Jackson library and converts and returns it as an AddressModel
-    public static AddressModel deserializeJSON(JSON j) {
+    public static AddressModel deserializeJSON(JsonNode node) throws JsonProcessingException {
         
-        AddressModel = JSON
-        return AddressModel;
+        AddressModel address = mapper.treeToValue(node, AddressModel.class);
+        return address;
         
     }
     
